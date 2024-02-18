@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>simon</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div id="app">
+    <h1 class="h1">Simon The Game</h1>
+    <div class="game-wrapper">
+      <div class="game">
+        <div class="board" :style="{ 'pointer-events': boardDisabled ? 'none' : 'auto' }">
+          <div class="item item_yellow" id="item1"
+            v-on:click="pressItem(1), checkClick(1)"
+            :class="{'item_pressed': isPressed1}"></div>
+          <div class="item item_blue" id="item2"
+            v-on:click="pressItem(2), checkClick(2)"
+            :class="{'item_pressed': isPressed2}"></div>
+          <div class="item item_red" id="item3"
+            v-on:click="pressItem(3), checkClick(3)"
+            :class="{'item_pressed': isPressed3}"></div>
+          <div class="item item_green" id="item4"
+            v-on:click="pressItem(4), checkClick(4)"
+            :class="{'item_pressed': isPressed4}"></div>
+        </div>
+        <div class="settings">
+          <p>Раунд {{ round }}</p>
+          <p>Уровень сложности:</p>
+            <input type="radio" id="easy" name="easy" value="1500" v-model="level" />
+            <label for="easy">Легкий</label><br />
+            <input type="radio" id="middle" name="middle" value="1000" v-model="level" />
+            <label for="middle">Средний</label><br />
+            <input type="radio" id="hard" name="hard" value="400" v-model="level" />
+            <label for="hard">Сложный</label><br />
+            <button class="start-button"
+              v-on:click="startRound()"
+              :disabled="btnDisabled">Начать</button>
+            <button class="stop-button"
+              v-on:click="gameOver()"
+              v-show="btnDisabled">Завершить</button>
+            <div class="game-over"
+              v-show="gameOverText">
+              <p>Игра завершена</p>
+            </div>
+            
+        </div>
+    </div> 
+  </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<script src="script.js"></script>
+</html>
